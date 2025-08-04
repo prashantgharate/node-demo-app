@@ -3,7 +3,7 @@ const app = express();
 
 // Respond with message when a GET request is made to the root "/"
 app.get('/', (req, res) => {
-  res.send('Welcome from Prashant Gharate Created Nodejs App');
+  res.send('Welcome from Prashant R Gharate Created Nodejs App');
 });
 
 // Start server on port 3000 or custom port via environment variable
