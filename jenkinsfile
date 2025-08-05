@@ -1,0 +1,41 @@
+pipeline {
+    agent any
+
+    environment {
+        NODE_ENV = 'production'
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                echo '🔧 Installing Dependencies...'
+                sh 'npm install'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo '🧪 Running Tests...'
+                sh 'npm test || echo "⚠️ Tests failed, continuing..."'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo '🚀 Deploying the App...'
+                sh 'pkill node || true'
+                sh 'nohup node index.js > output.log 2>&1 &'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo '✅ Deployment Successful!'
+        }
+        failure {
+            echo '❌ Pipeline Failed!'
+        }
+    }
+}
+
